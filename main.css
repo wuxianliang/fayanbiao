@@ -1,0 +1,11 @@
+/* CSS declarations go here */
+table { border-collapse: collapse; }
+th, td { border: 3.5px solid #ccc;border-color: #ffffff;}
+th div { width: 20px; }
+.show { width: 20px;writing-mode:vertical-lr;position:relative;text-align: center;display: inline-block;}
+td div { width: 20px; height: 20px;
+	overflow: hidden; text-overflow: ellipsis; }
+div.text { text-align: center; }
+th #name {width: 20px;writing-mode:vertical-lr;}
+th #number {width: 15px; }
+.score {margin: 3.5px 0px 0px 0px;color:white;text-align: center}

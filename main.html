@@ -1,0 +1,54 @@
+<head>
+    <title>发言表</title>
+</head>
+
+<body>
+</body>
+
+<template name="home">
+    <div class="ui fluid menu"  style="width:1280px">
+        <div class="item">
+          <div class="ui icon red button" data-bind="click: addNew" >
+            <i class="add square icon"></i>
+            <span>发言表</span>
+          </div>
+        </div>
+
+        <div class="item" data-bind="if:new">
+            <div class="ui input">
+              <input data-bind="value:className, returnKey: addNewClass" placeholder="添加新的班级">
+            </div>
+        </div>
+
+        <div class="item" data-bind="if:new">
+            <div class="ui input">
+              <input data-bind="value:number, returnKey:switchFocus, focused:numberIsFocused" placeholder="学号">
+            </div>
+        </div>
+        <div class="item" data-bind="if:new">
+            <div class="ui input">
+              <input data-bind="value:name, returnKey: addNewStudent, focused: nameIsFocused" placeholder="姓名">
+            </div>
+        </div>
+
+        <div class="right menu">
+
+          <div class="item">
+            {{>loginButtons}}
+          </div>
+          <div class="item">
+            <i class="add square icon"></i>
+            <div class="ui fitted toggle checkbox" data-bind="click: switchPlusMinus">
+              <input type="checkbox"   >
+              <label></label>
+            </div>
+            <i class="minus square icon" ></i>
+          </div>
+        </div>
+
+    </div>
+
+      {{> spreadsheet}}
+
+
+</template>

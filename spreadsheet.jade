@@ -1,0 +1,63 @@
+template(name='spreadsheet')
+	.ui.top.attached.tabular.menu
+		each classes
+			+ban
+	each classes
+		+table
+
+template(name="ban")
+	a.item(data-tab="{{_id}}" data-bind="click: selectClassId") {{className}}
+			
+template(name="table")
+	.ui.bottom.attached.tab.segment(data-tab="{{_id}}")
+			
+		table
+			tr
+				th#number 学号				
+				th#name 姓名		
+				each lessons
+					+lesson
+			
+			each students
+				+student	
+
+template(name="lesson")
+	th
+		.show(data-bind='click:showLessonReport' ) {{name}}
+template(name="lessonReport")
+	.header
+		h2.ui.header(data-bind="if:showName, click:change") 《{{newName}}》
+		.ui.input(data-bind="if:changeName, click:change")
+				input(data-bind="returnKey:updateName, value:name, focused: isFocused" type="text" placeholder="{{newName}}" )
+		h3.right.floated.ui.header(data-bind="if:showTime, click:switch") 执教日期：{{date}}
+		.ui.input(data-bind="if:inputTime, click:switch")
+			input(data-bind="value:teachTime, returnKey:updateTime, focused: isFocused" type="text" placeholder="{{date}}")
+	.content
+		.ui.segment
+			h2.ui.header(data-bind="if:showRanks") 《{{newName}}》的发言数量统计图
+			h2.ui.header(data-bind="if:showDetails") 《{{newName}}》的发言人数百分比
+			canvas#ranks(width="750" height="200" data-bind="if:showRanks, click:switchCanvas")
+			canvas#details(width="750" height="200" data-bind="if:showDetails, click:switchCanvas")
+	.actions
+template(name="student")
+	tr
+		th(data-bind="hover: showDelete")
+			i.red.delete.icon(data-bind="if:showDelete, click:deleteStudent")
+			| {{number}}
+		th#name(data-bind="click:showStudentReport") {{name}}
+		each scores
+			+score
+
+template(name='score')
+	td
+		.score(data-bind='click:plusOne("rank0"), text:rank("rank0")' style="background: {{rank0color}}") 
+		.score(data-bind='click:plusOne("rank1"), text:rank("rank1")' style="background: {{rank1color}}") 
+		.score(data-bind='click:plusOne("rank2"), text:rank("rank2")' style="background: {{rank2color}}") 
+		.score(data-bind='click:plusOne("rank3"), text:rank("rank3")' style="background: {{rank3color}}") 
+template(name="studentReport")
+	.header
+		h2.ui.header {{name}}的各水平发言数量统计图
+	.content
+		.ui.segment
+			canvas#student(width="750" height="200")
+	.actions
